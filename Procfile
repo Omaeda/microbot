@@ -1,1 +1,1 @@
-worker: python3 -m ubot
+web: python3 -m ubot
