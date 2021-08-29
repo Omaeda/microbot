@@ -1,9 +1,21 @@
+import os
 from configparser import SafeConfigParser
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Settings():
+    base = {"api_key": os.getenv("API_KEY"), "api_hash": os.getenv("API_HASH"),
+            "session_name": os.getenv("SESSION_NAME")}
+
     config = SafeConfigParser()
     config.read("settings.ini")
+
+    for i, k in base.items():
+        if k is not None:
+            config.set("DEFAULT", i, k)
 
     def write_changes(self):
         with open('settings.ini', 'w') as config_file:
